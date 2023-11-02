@@ -19,9 +19,22 @@ export const CommentPage = ()=> {
         setAddComment(inputValue)
     }
 
+    const handleFormSubmit = () => {
+        fetch('/api/create', {
+            method: 'POST',
+            body: JSON.stringify({
+                content: addComment
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => response.json())
+          .then(message => console.log(message))
+    }
+
     return(
         <>
-            <Form userInput={addComment} onFormChange={handleFormChange}/>
+            <Form userInput={addComment} onFormChange={handleFormChange} onFormSubmit={handleFormSubmit}/>
             <Card listOfComments={comment}/>
         </>
     )
