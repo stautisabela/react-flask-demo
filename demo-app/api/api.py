@@ -41,5 +41,9 @@ def create():
         db.session.commit()
     return {'201': 'comment created successfully.'}
 
+@app.route('/api/<int:id>', methods=['GET'])
+def show(id):
+    return jsonify([*map(comment_serializer, Comment.query.filter_by(id=id))])
+
 if __name__ == '__main__':
     app.run(debug=True)
