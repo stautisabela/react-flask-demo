@@ -41,6 +41,15 @@ def create():
         db.session.commit()
     return {'201': 'comment created successfully.'}
 
+@app.route('/api/<int:id>', methods=['POST'])
+def delete(id):
+    request_data = json.loads(request.data)
+
+    with app.app_context():
+        Comment.query.filter_by(id=request_data['id']).delete()
+        db.session.commit()
+    return { '204': 'comment deleted successfully.' }
+
 @app.route('/api/<int:id>', methods=['GET'])
 def show(id):
     return jsonify([*map(comment_serializer, Comment.query.filter_by(id=id))])

@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react';
+import { Delete } from '../Components/Delete/delete';
 import {
-    useParams
+    useParams,
+    Link
 } from "react-router-dom";
 
 export const Show = () => {
@@ -16,6 +18,9 @@ export const Show = () => {
     return(
         <div>
             {comment.length > 0 && comment.map(data => <div>{data.content}</div>)}
+            <Delete id={id}/>
+            <hr></hr>
+            <Link to='/'>Back to comments</Link>
         </div>
     )
 }
